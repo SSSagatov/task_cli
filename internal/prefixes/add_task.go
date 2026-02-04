@@ -1,4 +1,4 @@
-package action
+package prefixes
 
 import (
 	"encoding/json"
@@ -8,6 +8,7 @@ import (
 	"time"
 )
 
+// ======= Добавить задачу =======
 func Write(taskName string) error {
 	var tasks []model.Task
 	//читаем tasks.json

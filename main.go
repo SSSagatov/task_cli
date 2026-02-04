@@ -5,12 +5,12 @@ import (
 	"os"
 	"strings"
 
-	"task_cli/internal/action"
+	"task_cli/internal/prefixes"
 )
 
 func main() {
 	if len(os.Args) < 2 {
-		fmt.Println("[WARNING]: слишком мало аргументов(add, delete, update)\n[EXAMPLE]: go run main.go (prefix) (task)")
+		fmt.Println("[WARNING]: слишком мало аргументов(add, done, delete, update)\n[EXAMPLE]: go run main.go (prefix) (task)")
 		return
 	}
 
@@ -23,12 +23,23 @@ func main() {
 			return
 		}
 		taskName := strings.Join(os.Args[2:], " ")
-		err := action.Write(taskName)
+		err := prefixes.Write(taskName)
 		if err != nil {
 			fmt.Println("[ERROR]:", err)
 			return
 		}
 		fmt.Println("Задача добавлена:", taskName)
+	case "done":
+		if len(os.Args) < 3 {
+			fmt.Println("[WARNING]: укажите id задания")
+			return
+		}
+		id := os.Args[3]
+		err := prefixes.TaskDoneUpdate(id)
+		if err != nil {
+			fmt.Println("[ERROR]:", err)
+			return
+		}
 	default:
 		fmt.Println("[ERROR]: неизвестная команда", command)
 	}
