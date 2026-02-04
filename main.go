@@ -34,7 +34,7 @@ func main() {
 			fmt.Println("[WARNING]: укажите id задания")
 			return
 		}
-		id := os.Args[3]
+		id := os.Args[2]
 		err := prefixes.TaskDoneUpdate(id)
 		if err != nil {
 			fmt.Println("[ERROR]:", err)
