@@ -40,6 +40,7 @@ func main() {
 			fmt.Println("[ERROR]:", err)
 			return
 		}
+		fmt.Println("Задача выолнена!")
 	default:
 		fmt.Println("[ERROR]: неизвестная команда", command)
 	}
