@@ -18,12 +18,12 @@ func Write(taskName string) error {
 		return err
 	}
 	json.Unmarshal(data, &tasks)
-
+	//присваиваем id
 	id := 1
 	if len(tasks) > 0 {
 		id = tasks[len(tasks)-1].ID + 1
 	}
-
+	//собираем json ответ
 	newTask := model.Task{
 		ID:        id,
 		Name:      taskName,
@@ -31,11 +31,11 @@ func Write(taskName string) error {
 		CreatedAt: time.Now(),
 	}
 	tasks = append(tasks, newTask)
-
+	//сохраняем обратно в файл
 	data, err = json.MarshalIndent(tasks, "", " ")
 	if err != nil {
 		return err
 	}
-
+	//записываем сохранение в storage.json
 	return os.WriteFile("storage/tasks.json", data, 0644)
 }

@@ -8,8 +8,8 @@ import (
 	"task_cli/internal/model"
 )
 
-// ======= Выполнено/Не выполнено =======
-func TaskDoneUpdate(id string) error {
+// ======= Изменение задания =======
+func TaskUpdate(id string, name string) error {
 	//переводим id string в integer
 	taskID, err := strconv.Atoi(id)
 	if err != nil {
@@ -29,11 +29,11 @@ func TaskDoneUpdate(id string) error {
 		fmt.Println("[ERROR]: ошибка парсинга JSON")
 		return err
 	}
-	//ищем id
+	//находим задачу по id
 	found := false
 	for i := range tasks {
 		if tasks[i].ID == taskID {
-			tasks[i].Done = true
+			tasks[i].Name = name
 			found = true
 			break
 		}

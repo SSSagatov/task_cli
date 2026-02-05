@@ -41,6 +41,20 @@ func main() {
 			return
 		}
 		fmt.Println("Задача выолнена!")
+	case "update":
+		if len(os.Args) < 4 {
+			fmt.Println("[WARNING]: задайте id задачи и укажите изменение")
+			return
+		}
+
+		id := os.Args[2]
+		taskName := strings.Join(os.Args[3:], " ")
+		err := prefixes.TaskUpdate(id, taskName)
+		if err != nil {
+			fmt.Println("[ERROR]:", err)
+			return
+		}
+		fmt.Println("Задача изменена!")
 	default:
 		fmt.Println("[ERROR]: неизвестная команда", command)
 	}
